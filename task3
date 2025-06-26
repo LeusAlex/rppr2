@@ -1,0 +1,41 @@
+function fetchData(url) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (url === 'https://api.example.com/users') {
+        resolve([
+          { id: 1, name: 'Иван' },
+          { id: 2, name: 'Мария' }
+        ]);
+      } else if (url.startsWith('https://api.example.com/users/')) {
+        const userId = parseInt(url.split('/').pop(), 10);
+        if (userId === 1) {
+          resolve({ id: 1, name: 'Иван', email: 'ivan@example.com' });
+        } else {
+          reject(new Error('Пользователь не найден'));
+        }
+      } else {
+        reject(new Error('Неверный URL'));
+      }
+    }, 2000);
+  });
+}
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function loadUserData() {
+  try {
+    const users = await fetchData('https://api.example.com/users');
+    console.log('Список пользователей:', users);
+
+    await delay(1000); // пауза 1 секунда
+
+    const userDetails = await fetchData(`https://api.example.com/users/${users[0].id}`);
+    console.log('Данные первого пользователя:', userDetails);
+  } catch (err) {
+    console.error('Ошибка:', err.message);
+  }
+}
+
+loadUserData();
