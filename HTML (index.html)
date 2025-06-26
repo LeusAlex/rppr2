@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UI Kit для магазина</title>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- Меню -->
+  <nav class="menu" id="mainMenu">
+    <div class="menu__logo">ShopBrand</div>
+    <button class="menu__btn-toggle" aria-label="Показать меню" id="menuToggle">☰</button>
+    <ul class="menu__nav">
+      <li class="menu__item"><a href="#" class="menu__link">Главная</a></li>
+      <li class="menu__item"><a href="#" class="menu__link">Продукты</a></li>
+      <li class="menu__item"><a href="#" class="menu__link">Связаться</a></li>
+    </ul>
+  </nav>
+
+  <main class="wrapper" style="padding: 2.2rem 0;">
+    <!-- Поле поиска -->
+    <label for="searchField" class="visually-hidden">Поиск по товарам</label>
+    <div class="field" id="searchBox">
+      <input type="text" id="searchField" class="field__input" placeholder="Искать товары..." />
+      <span class="field__icon" aria-hidden="true">🔎</span>
+      <!-- Для демонстрации ошибки -->
+      <!-- <div class="field__error-text">Введите текст для поиска</div> -->
+    </div>
+
+    <!-- Кнопки -->
+    <div style="margin: 1.8rem 0;">
+      <button class="btn btn--primary btn--sm">Купить</button>
+      <button class="btn btn--secondary btn--md">Подробнее</button>
+      <button class="btn btn--primary btn--lg" disabled>Недоступно</button>
+    </div>
+
+    <!-- Сетка карточек -->
+    <section class="grid-list" aria-label="Каталог товаров">
+      <article class="product-card product-card--image product-card--md" tabindex="0">
+        <img src="images/product1.jpg" alt="Товар номер один" class="product-card__img" />
+        <h3 class="product-card__header">Товар 1</h3>
+        <p class="product-card__desc">Описание первого товара с отличным качеством.</p>
+        <button class="btn btn--primary btn--md">Добавить в корзину</button>
+      </article>
+
+      <article class="product-card product-card--md" tabindex="0">
+        <h3 class="product-card__header">Товар 2</h3>
+        <p class="product-card__desc">Описание второго товара без изображения.</p>
+        <button class="btn btn--secondary btn--md">Подробнее</button>
+      </article>
+
+      <!-- Добавьте другие карточки при необходимости -->
+    </section>
+  </main>
+
+  <script>
+    const toggleBtn = document.getElementById('menuToggle');
+    const menu = document.getElementById('mainMenu');
+
+    toggleBtn.addEventListener('click', () => {
+      menu.classList.toggle('menu--open');
+    });
+  </script>
+
+</body>
+</html>
