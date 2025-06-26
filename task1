@@ -1,0 +1,12 @@
+console.log('1. Синхронный код начинается'); // Выполнится сразу
+
+setTimeout(() => {
+  console.log('4. setTimeout с нулевой задержкой (макротаска)');
+}, 0);
+
+Promise.resolve()
+  .then(() => {
+    console.log('3. Promise.then (микротаска)');
+  });
+
+console.log('2. Синхронный код продолжается');
