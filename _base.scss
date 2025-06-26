@@ -1,0 +1,11 @@
+/* Универсальный сброс */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: $font-stack;
+  background: $background-color;
+  color: $text-color;
+}
