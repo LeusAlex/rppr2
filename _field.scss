@@ -1,0 +1,43 @@
+.field {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 320px;
+
+  &__input {
+    width: 100%;
+    padding: 0.55rem 2.8rem 0.55rem 0.85rem;
+    font-size: $font-md;
+    border: 1px solid #bbb;
+    border-radius: $radius;
+    transition: border-color 0.25s ease;
+    outline-offset: 3px;
+
+    &:focus {
+      border-color: $main-color;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba($main-color, 0.25);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1.3rem;
+    color: #999;
+  }
+
+  &--error {
+    .field__input {
+      border-color: $error-color;
+    }
+    .field__error-text {
+      color: $error-color;
+      font-size: $font-sm;
+      margin-top: 0.3rem;
+    }
+  }
+}
