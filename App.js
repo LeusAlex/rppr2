@@ -1,28 +1,34 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { FavoriteProvider } from './FavoriteContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './AuthContext';
+import PrivateRoute from './PrivateRoute';
+import Header from './Header';
 
-const Home = lazy(() => import('./pages/Home'));
-const Favourites = lazy(() => import('./pages/Favourites'));
-const Cart = lazy(() => import('./pages/Cart'));
+const LoginPage = lazy(() => import('./LoginPage'));
+const HomePage = lazy(() => import('./HomePage')); // Ваша главная страница
 
-const App = () => {
+function App() {
   return (
-    <FavoriteProvider>
+    <AuthProvider>
       <Router>
-        <nav>
-          <Link to="/">Главная</Link> | <Link to="/favourites">Избранное</Link> | <Link to="/cart">Корзина</Link>
-        </nav>
+        <Header />
         <Suspense fallback={<div>Загрузка...</div>}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <HomePage />
+                </PrivateRoute>
+              }
+            />
+            {/* Добавьте другие защищённые маршруты */}
           </Routes>
         </Suspense>
       </Router>
-    </FavoriteProvider>
+    </AuthProvider>
   );
-};
+}
 
 export default App;
