@@ -1,0 +1,34 @@
+function fetchData(url) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // Симуляция API с двумя URL
+      if (url === 'https://api.example.com/users') {
+        resolve([
+          { id: 1, name: 'Иван' },
+          { id: 2, name: 'Мария' }
+        ]);
+      } else if (url.startsWith('https://api.example.com/users/')) {
+        const userId = parseInt(url.split('/').pop(), 10);
+        if (userId === 1) {
+          resolve({ id: 1, name: 'Иван', email: 'ivan@example.com' });
+        } else {
+          reject(new Error('Пользователь не найден'));
+        }
+      } else {
+        reject(new Error('Неверный URL'));
+      }
+    }, 2000);
+  });
+}
+
+fetchData('https://api.example.com/users')
+  .then(users => {
+    console.log('Список пользователей:', users);
+    return fetchData(`https://api.example.com/users/${users[0].id}`);
+  })
+  .then(userDetails => {
+    console.log('Данные первого пользователя:', userDetails);
+  })
+  .catch(err => {
+    console.error('Ошибка:', err.message);
+  });
